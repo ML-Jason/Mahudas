@@ -14,16 +14,19 @@ process.env.APP_ENV = process.env.APP_ENV || 'dev';
 
 // 載入config
 app.config = configLoader(app.appInfo);
+app.emit('configDidLoad');
 
 // 設定public目錄
-app.use(koaStatic(path.join(app.appInfo.root, app.config.static.dir || 'app/public')));
+app.use(koaStatic(path.join(app.appInfo.root, (app.config.static || {}).dir || 'app/public')));
 
 // 載入application
 applicationLoader(app);
+app.emit('didLoad');
 
 // 啟動Server
 const port = app.config.port || 8080;
 app.listen(port);
 console.log(`Listening ${port}`);
+app.emit('serverDidReady');
 
 module.exports = app;
