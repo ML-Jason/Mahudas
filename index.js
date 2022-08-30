@@ -7,10 +7,11 @@ const koaStatic = require('koa-static');
 const configLoader = require('./lib/config_loader');
 const applicationLoader = require('./lib/application_loader');
 require('./lib/console');
-const app = require('./lib/app');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 process.env.APP_ENV = process.env.APP_ENV || 'dev';
+
+const app = require('./lib/app');
 
 // 載入config
 app.config = configLoader(app.appInfo);
@@ -26,7 +27,9 @@ app.emit('didLoad');
 // 啟動Server
 const port = app.config.port || 8080;
 app.listen(port);
-console.log(`Listening ${port}`);
+console.log(`serverDidReady, Listening ${port}`);
 app.emit('serverDidReady');
 
 module.exports = app;
+
+console.log(app);
