@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const demo = async (ctx, next) => {
     ctx.locals = 'passing value';
-    next();
+    await next();
   };
   return demo;
 };
