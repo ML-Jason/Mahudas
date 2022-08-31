@@ -5,6 +5,7 @@
 const path = require('path');
 const koaStatic = require('koa-static');
 const configLoader = require('./lib/config_loader');
+const loadCoreMiddlewareConfig = require('./lib/load_core_middleware_config');
 const applicationLoader = require('./lib/application_loader');
 require('./lib/console');
 
@@ -17,6 +18,9 @@ const init = async () => {
   // 載入config
   app.config = configLoader(app.appInfo);
   app.emit('configDidLoad');
+
+  // 載入框架預設 middleware
+  loadCoreMiddlewareConfig(app);
 
   // 載入application
   await applicationLoader(app);
