@@ -7,6 +7,8 @@ const koaStatic = require('koa-static');
 const configLoader = require('./lib/config_loader');
 const loadCoreMiddlewareConfig = require('./lib/load_core_middleware_config');
 const applicationLoader = require('./lib/application_loader');
+const serviceLoader = require('./lib/loader/service_loader');
+
 require('./lib/console');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
@@ -24,6 +26,7 @@ const init = async () => {
 
   // 載入application
   await applicationLoader(app);
+  await serviceLoader(app);
   app.emit('didLoad');
 
   // 讓router生效，這個步驟需要在所有app.use都掛載後才觸發，否則可能會造成middleware失效
