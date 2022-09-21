@@ -1,6 +1,5 @@
-module.exports = (ctx) => {
-  const test = async () => `${ctx.originalUrl} - this service returns an object which defines functions`;
-  return {
-    test,
-  };
+module.exports = function onlyFunction() {
+  const { ctx } = this;
+  if (ctx) return `${ctx.originalUrl} - this service is simply a function`;
+  return 'this service is simply a function and no ctx';
 };
