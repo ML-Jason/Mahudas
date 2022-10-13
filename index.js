@@ -4,6 +4,7 @@
 
 const path = require('path');
 const koaStatic = require('koa-static');
+const v8 = require('v8');
 const configLoader = require('./lib/config_loader');
 const loadCoreMiddlewareConfig = require('./lib/load_core_middleware_config');
 const applicationLoader = require('./lib/application_loader');
@@ -43,6 +44,13 @@ const init = async () => {
   app.listen(port);
   console.log(`serverDidReady, Listening ${port}`);
   app.emit('serverDidReady');
+
+  const heapStatistics = v8.getHeapStatistics();
+  const memoryInfo = {
+    used_heap_size: `${heapStatistics.used_heap_size / (1024 * 1024)} Mb`,
+    heap_size_limit: `${heapStatistics.heap_size_limit / (1024 * 1024)} Mb`,
+  };
+  console.log('Memory usage:', memoryInfo);
 };
 
 init();
