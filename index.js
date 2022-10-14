@@ -5,9 +5,11 @@
 const path = require('path');
 const koaStatic = require('koa-static');
 const v8 = require('v8');
-const configLoader = require('./lib/config_loader');
-const loadCoreMiddlewareConfig = require('./lib/load_core_middleware_config');
-const applicationLoader = require('./lib/application_loader');
+const configLoader = require('./lib/loader/config_loader');
+const coreMiddlewareConfigLoader = require('./lib/loader/core_middleware_config_loader');
+const controllerLoader = require('./lib/loader/controller_loader');
+const middlewareLoader = require('./lib/loader/middleware_loader');
+const routerLoader = require('./lib/loader/router_loader');
 const serviceLoader = require('./lib/loader/service_loader');
 const extendLoader = require('./lib/loader/extend_loader');
 
@@ -24,10 +26,12 @@ const init = async () => {
   app.emit('configDidLoad');
 
   // 載入框架預設 middleware
-  loadCoreMiddlewareConfig(app);
+  coreMiddlewareConfigLoader(app);
 
   // 載入application
-  await applicationLoader(app);
+  await controllerLoader(app);
+  await middlewareLoader(app);
+  await routerLoader(app);
   await serviceLoader(app);
   await extendLoader(app);
   app.emit('didLoad');
