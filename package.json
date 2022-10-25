@@ -13,10 +13,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async": "^3.2.4",
     "dayjs": "^1.11.5",
     "extend2": "^1.0.1",
-    "fs-extra": "^10.1.0",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "koa-helmet": "^6.1.0",
