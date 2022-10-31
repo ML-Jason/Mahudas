@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cron": "^2.1.0",
     "dayjs": "^1.11.5",
     "extend2": "^1.0.1",
     "koa": "^2.13.4",
