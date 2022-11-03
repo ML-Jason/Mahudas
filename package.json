@@ -1,6 +1,6 @@
 {
   "name": "mahudas",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,7 @@
   },
   "author": "",
   "license": "ISC",
+  "homepage": "https://github.com/MedialandDev/2022_08_Mahudas",
   "dependencies": {
     "cron": "^2.1.0",
     "dayjs": "^1.11.5",
