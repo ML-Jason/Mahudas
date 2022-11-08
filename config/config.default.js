@@ -3,6 +3,8 @@ const config = {
   static: {
     dir: 'app/public',
   },
+  // 如果命名是"-"開頭，就忽略載入
+  loaderIgnoreFilePrefix: '-',
   coreMiddleware: {
     /**
      * koa-bodyParser
