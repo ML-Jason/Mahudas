@@ -80,63 +80,11 @@ to.mongoID = (value) => {
 
 /**
  * 轉換成url，如果是不合法的格式，則回傳空字串。
- *
- * - 參數:
- *  - str: 來源網址
- *  - options: 額外參數
- *    - localhost: 是否允許'localhost'，預設true
- *    - wildcard: 是否允許子網域有*，預設false
- *    - protocols: 允許的protocal，預設為['http','https']
- *
- * @param {String} value - 來源網址
- * @param {Object} options - 參數
- * @param {Boolean} options.localhost - 是否允許'localhost'，預設true
- * @param {Boolean} options.wildcard - 是否允許子網域有*，預設false
- * @param {String[]} options.protocols - 允許的protocal，預設為['http','https']
- * @returns {String} result
  */
-to.url = (
-  value,
-  { localhost = true, wildcard = false, protocols = ['http', 'https'] } = {},
-) => {
-  const protocolsAllow = Array.isArray(protocols)
-    ? protocols.map((v) => v.toString())
-    : ['http', 'https'];
-  const rs = to.string(value);
-  let protocol = '';
-  let tmpUrl = rs;
-  if (rs.indexOf('://') > 0) {
-    if (rs.split('://').length > 2) return '';
-    [protocol, tmpUrl] = rs.split('://');
-  }
+to.url = (value) => {
+  const str = to.string(value);
 
-  const ns = tmpUrl.split('.');
-  const globalNames = ['com', 'gov', 'org', 'co', 'idv'];
-
-  if (tmpUrl.indexOf('*') >= 0) {
-    if (!wildcard) return '';
-    // 不允許除了subdomain以外的*
-    if (tmpUrl.indexOf('*') > 0) return '';
-    // 不允許*後面不是接.
-    if (tmpUrl.match(/\*(?!\.)/)) return '';
-    // 不允許 *.com 或 *.tw 這種沒有主domain的網域
-    if (ns.length <= 2) return '';
-    // 不允許 *.com.tw 或 *.co.jp 或 *.org.tw 這種沒有主domain的網域
-    if (globalNames.includes(ns[1])) return '';
-
-    tmpUrl = tmpUrl.replace('*', 'star');
-  } else if (globalNames.includes(ns[0])) return '';
-
-  if (localhost) {
-    if (tmpUrl.indexOf('localhost') === 0) tmpUrl = tmpUrl.replace('localhost', 'test.com');
-  }
-
-  if (
-    is.url(protocol ? `${protocol}://${tmpUrl}` : tmpUrl, {
-      protocols: protocolsAllow,
-    })
-  ) return rs;
-
+  if (is.url(str)) return str;
   return '';
 };
 
