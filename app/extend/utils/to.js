@@ -6,7 +6,7 @@ const to = {};
 /**
  * 轉換成字串，undefined或null都會變成空字串。
  *
- * @param {String} value - 來源字串
+ * @param {any} value - 來源字串
  * @returns {String} result string
  */
 to.string = (value) => {
