@@ -58,7 +58,7 @@ is.string = (target) => typeof target === 'string';
 is.symbol = (target) => typeof target === 'symbol';
 
 // eslint-disable-next-line no-void,valid-typeof
-is.undefined = (target) => typeof target === void 0;
+is.undefined = (target) => target === void 0;
 
 is.object = (target) => typeof target === 'object' && target !== null;
 
@@ -81,14 +81,14 @@ is.asyncFunction = (target) => target
 is.promise = (target) => target
     && typeof target.then === 'function';
 
-is.int = (target) => this.number(target)
+is.int = (target) => is.number(target)
     && target % 1 === 0;
 
-is.int32 = (target) => this.int(target)
+is.int32 = (target) => is.int(target)
     && target < MAX_INT_31
     && target >= -MAX_INT_31;
 
-is.long = (target) => this.int(target)
+is.long = (target) => is.int(target)
     && (target >= MAX_INT_31 || target < -MAX_INT_31);
 
 is.Long = (target) => this.object(target)
@@ -224,9 +224,9 @@ is.FQDN = (target, options = {}) => {
  * 從 https://github.com/validatorjs/validator.js/blob/master/src/lib/isIP.js 複製過來
  */
 is.ip = (target, version = '') => {
-  const versionString = (is.string(target)) ? String(version) : '';
+  const versionString = (is.string(version)) ? String(version) : '';
   if (!versionString) {
-    return is.ip(target, 4) || is.ip(target, 6);
+    return is.ip(target, '4') || is.ip(target, '6');
   }
   if (versionString === '4') {
     return IPv4AddressRegExp.test(target);
