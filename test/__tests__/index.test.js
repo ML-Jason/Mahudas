@@ -40,4 +40,9 @@ describe('測試Router與Controller與Middleware', () => {
       .expect(200);
     expect(res.text).toBe('this is a public file');
   });
+
+  test('測試extend帶入app參數', () => {
+    const port = app.getPORT();
+    expect(port).toBe(app.config.port);
+  });
 });
