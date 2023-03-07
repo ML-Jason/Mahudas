@@ -34,6 +34,16 @@ const config = {
       },
     },
   },
+  logger: {
+    logDir: 'logs',
+    outputFile: true,
+    rotate: {
+      datePattern: 'YYYY_MM_DD',
+      zippedArchive: true,
+      maxSize: '50m',
+      maxFiles: '7d',
+    },
+  },
 };
 
 module.exports = config;
