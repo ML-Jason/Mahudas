@@ -35,8 +35,14 @@ const config = {
     },
   },
   logger: {
-    logDir: 'logs',
-    outputFile: true,
+    consoleLevel: 'DEBUG', // NONE, DEBUG, INFO, WARN, ERROR
+    dir: 'logs',
+    outputLevel: 'NONE', // NONE, DEBUG, INFO, WARN, ERROR
+    outputJSON: true,
+    needEnvPrefix: true,
+    appLogName: 'app-%DATE%.log',
+    errorLogName: 'error-%DATE%.log',
+    enableRotate: true,
     rotate: {
       datePattern: 'YYYY_MM_DD',
       zippedArchive: true,
