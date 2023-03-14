@@ -1,7 +1,13 @@
 module.exports = {
-  // 擴充ctx，例如：
-  // ext() {
-  //   console.log('this is a ctx extend');
-  // },
-  // 就可以透過ctx.ext()呼叫
+  runInBackground(scope) {
+    const ctx = this;
+    // eslint-disable-next-line no-promise-executor-return
+    return new Promise((resolve) => setImmediate(resolve))
+      .then(() => scope(ctx))
+      .catch((err) => {
+        // eslint-disable-next-line no-param-reassign
+        err.runInBackground = true;
+        ctx.app.emit('onBackgroundError', err, ctx);
+      });
+  },
 };
