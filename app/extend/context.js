@@ -16,7 +16,7 @@ module.exports = {
       if (!scope) return;
 
       const onError = (err) => {
-      // eslint-disable-next-line no-param-reassign
+        // eslint-disable-next-line no-param-reassign
         err.runInBackground = true;
         ctx.app.emit('onBackgroundError', err, ctx);
       };
@@ -52,6 +52,10 @@ module.exports = {
         }
       }
     };
+
+    try {
+      scope.catch(() => { });
+    } catch (e) { /* */ }
 
     return new Promise((resolve) => {
       setImmediate(resolve);
