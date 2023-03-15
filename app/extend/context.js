@@ -12,21 +12,13 @@ module.exports = {
   runInBackground(scope, params = []) {
     const ctx = this;
 
+    const onError = (err) => {
+      // eslint-disable-next-line no-param-reassign
+      err.runInBackground = true;
+      ctx.app.emit('onBackgroundError', err, ctx);
+    };
+
     const dealScope = () => {
-      if (!scope) return;
-
-      const onError = (err) => {
-        // eslint-disable-next-line no-param-reassign
-        err.runInBackground = true;
-        ctx.app.emit('onBackgroundError', err, ctx);
-      };
-
-      // 如果傳入的是Promise，等待catch就好
-      if (scope.then && typeof scope.then === 'function') {
-        scope.catch(onError);
-        return;
-      }
-
       // 處理傳入的參數，準備pass給function使用
       let passParams = params;
       if (params !== undefined && !Array.isArray(params)) passParams = [params];
@@ -53,9 +45,13 @@ module.exports = {
       }
     };
 
-    try {
-      scope.catch(() => { });
-    } catch (e) { /* */ }
+    if (!scope) return null;
+
+    // 如果傳入的是Promise，等待catch就好
+    if (scope.then && typeof scope.then === 'function') {
+      scope.catch(onError);
+      return null;
+    }
 
     return new Promise((resolve) => {
       setImmediate(resolve);
