@@ -35,9 +35,9 @@ const config = {
     },
   },
   logger: {
-    consoleLevel: 'DEBUG', // NONE, DEBUG, INFO, WARN, ERROR
+    consoleLevel: 'debug', // NONE, DEBUG, INFO, WARN, ERROR
     dir: 'logs',
-    outputLevel: 'NONE', // NONE, DEBUG, INFO, WARN, ERROR
+    outputLevel: 'none', // NONE, DEBUG, INFO, WARN, ERROR
     outputJSON: true,
     needEnvPrefix: true,
     appLogName: 'app-%DATE%.log',
@@ -49,6 +49,7 @@ const config = {
       maxSize: '50m',
       maxFiles: '7d',
     },
+    trace: false,
   },
 };
 
