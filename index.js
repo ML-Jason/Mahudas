@@ -1,5 +1,8 @@
 /* eslint no-unused-vars:0 */
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
+process.env.APP_ENV = process.env.APP_ENV || 'local';
+
 /**
  * 程式進入點
  */
