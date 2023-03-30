@@ -9,5 +9,4 @@ module.exports = {
   // 就可以透過app.ext()呼叫
 
   utils,
-  // logger,
 };
