@@ -1,4 +1,5 @@
 const utils = require('./utils');
+const localCache = require('./localcache');
 // const logger = require('./logger');
 
 module.exports = {
@@ -9,4 +10,5 @@ module.exports = {
   // 就可以透過app.ext()呼叫
 
   utils,
+  localCache,
 };
