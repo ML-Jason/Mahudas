@@ -4,8 +4,8 @@ let app;
 beforeAll(async () => {
   app = await getApp();
 });
-afterAll(() => {
-  app.close();
+afterAll(async () => {
+  await app.close();
 });
 
 describe('Extend測試 Utils.is', () => {
