@@ -5,6 +5,8 @@ module.exports = {
   },
   parserOptions: {
     parser: 'babel-eslint',
+    // 設定eslint的ecma版本
+    ecmaVersion: 'latest',
   },
   extends: ['airbnb-base'],
   settings: {},
