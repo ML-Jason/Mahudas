@@ -152,7 +152,7 @@ is.FQDN = (target, options = {}) => {
 
   let str = (is.string(target)) ? String(target) : '';
 
-  const _options = extend(true, default_fqdn_options, options);
+  const _options = extend(true, {}, default_fqdn_options, options);
 
   /* Remove the optional trailing dot before checking validity */
   if (_options.allow_trailing_dot && str[str.length - 1] === '.') {
