@@ -144,7 +144,7 @@ is.email = (target) => {
 is.FQDN = (target, options = {}) => {
   const default_fqdn_options = {
     require_tld: true,
-    allow_underscores: false,
+    allow_underscores: true,
     allow_trailing_dot: false,
     allow_numeric_tld: false,
     allow_wildcard: false,
@@ -152,7 +152,7 @@ is.FQDN = (target, options = {}) => {
 
   let str = (is.string(target)) ? String(target) : '';
 
-  const _options = extend(true, options, default_fqdn_options);
+  const _options = extend(true, {}, default_fqdn_options, options);
 
   /* Remove the optional trailing dot before checking validity */
   if (_options.allow_trailing_dot && str[str.length - 1] === '.') {
@@ -249,7 +249,7 @@ is.url = (target, options = {}) => {
     require_host: true,
     require_port: false,
     require_valid_protocol: true,
-    allow_underscores: false,
+    allow_underscores: true,
     allow_trailing_dot: false,
     allow_protocol_relative_urls: false,
     allow_fragments: true,
@@ -281,7 +281,7 @@ is.url = (target, options = {}) => {
     return false;
   }
 
-  const _options = extend(true, options, default_url_options);
+  const _options = extend(true, {}, default_url_options, options);
 
   if (_options.validate_length && url.length >= 2083) {
     return false;
